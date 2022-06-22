@@ -28,6 +28,35 @@ if verifyErr != nil {
 fmt.Print("Payload is valid!")
 ```
 
+## Example with Labstack Echo
+
+```go
+// Handler
+func aws(c echo.Context) error {
+	log.Println("aws called...")
+
+
+	var notificationPayload sns.Payload
+	err := json.NewDecoder(c.Request().Body).Decode(&notificationPayload)
+
+	if err != nil {
+		log.Print(err)
+	}
+	verifyErr := notificationPayload.VerifyPayload()
+	if verifyErr != nil {
+		log.Print(verifyErr)
+    return c.String(http.StatusBadRequest, "")
+	}
+
+	log.Print("Payload is valid!")
+
+	return c.String(http.StatusOK, "")
+}
+
+```
+
+
+
 ### Subscribing to a topic
 
 ```go
