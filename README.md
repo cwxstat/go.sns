@@ -13,7 +13,7 @@ import (
   "encoding/json"
   "fmt"
 
-  "github.com/robbiet480/go.sns"
+  "github.com/cwxstat/go.sns"
 )
 
 var notificationPayload sns.Payload
